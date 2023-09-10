@@ -1,0 +1,136 @@
+{% extends 'baseFront.html.twig' %}
+
+ {% block nav %}
+  <!-- ======= Top Bar ======= -->
+  <section id="topbar" class="d-flex align-items-center">
+    <div class="container d-flex justify-content-center justify-content-md-between">
+      <div class="contact-info d-flex align-items-center">
+        <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@esprit.tn">contact@esprit.tn</a></i>
+        <i class="bi bi-phone d-flex align-items-center ms-4"><span>+216 70 250 000</span></i>
+      </div>
+
+      <div class="cta d-none d-md-flex align-items-center">
+        <a href="#values" class="scrollto">Get Started</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="d-flex align-items-center">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <div class="logo">
+        <h1><img src="{{ asset('assets/img/logo-esprit-2.b8fedba0.png') }} "  alt="logo"></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      </div>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="#hero">Accueil</a></li>
+          <li><a class="nav-link scrollto" href="#values">Programme Mobilité</a></li>
+      
+          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+          	<li>
+								<a class="nav-link scrollto" href="{{ path('app_dashboard') }}">Mes dépots</a>
+							</li>
+          <li class="dropdown">
+						<a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+
+							<span class="d-none d-md-block dropdown-toggle ps-2">{{ app.user.nom}}
+								{{ app.user.prenom}}</span>
+					
+						</a>
+						<!-- End Profile Iamge Icon -->
+
+						<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+							<li class="dropdown-header">
+								<h6>Bienvenu
+									{{ app.user.nom}}
+									{{ app.user.prenom}}</h6>
+								<span>Admin</span>
+							</li>
+							<li>
+								<hr class="dropdown-divider">
+							</li>
+
+							<li>
+								<a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+									<i class="bi bi-person"></i>
+									<span>Profile</span>
+								</a>
+							</li>
+
+							<li>
+								<hr class="dropdown-divider">
+							</li>
+
+							<li>
+								<a class="dropdown-item d-flex align-items-center" href="{{ path('app_logout') }}">
+									<i class="bi bi-box-arrow-right"></i>
+									<span class="text-danger">Déconnexion</span>
+								</a>
+							</li>
+</li>
+						</ul><!-- End Profile Dropdown Items --></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+  {% endblock %}
+
+
+ {% block about %}
+   <section id="values" class="values">
+  <div class="container">
+    <div class="row">
+ <div class="carrousel-container">
+        <button class="btn-prev">←</button>
+        <div class="carrousel">
+            {% for opportinute in opportinute %}
+            <div class="carte">
+                <h2 style="color: #A91818;">{{ opportinute.Titre }}</h2>
+                <p>{{ opportinute.id }}</p>
+                  <p>{{ opportinute.DateDebut ? opportinute.DateDebut|date('Y-m-d') : '' }} - {{ opportinute.Datefin ? opportinute.Datefin|date('Y-m-d') : ''}}</p>
+                <p>{{ opportinute.description }}</p>
+                <p><a href= "{{  path('candidature_create',{'id': opportinute.id}) }}"><i class="bi bi-arrow-right"></i>Remplir le Formulaire</a><p>
+            </div>
+           {% endfor %}
+            <!-- Ajoutez davantage de cartes ici -->
+        </div>
+        <button class="btn-next">→</button>
+    </div>
+
+    </div>
+  </div>
+</section>
+
+    <!-- End Values Section -->
+
+    <!-- ======= Clients Section ======= -->
+    <section id="clients" class="clients">
+      <div class="container" data-aos="fade-up">
+
+        <div class="clients-slider swiper">
+          <div class="swiper-wrapper align-items-center">
+            <div class="swiper-slide"><img src="assets/img/clients/client-1.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/clients/client-2.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/clients/client-3.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/clients/client-4.jpg" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/clients/client-5.jpg" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/clients/client-6.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/clients/client-7.jpg" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/clients/client-8.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/clients/client-9.jpg" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/clients/client-10.jpg" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/clients/client-11.jpg" class="img-fluid" alt=""></div>
+
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+      </div>
+    </section><!-- End Clients Section -->
+    {% endblock %}

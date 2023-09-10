@@ -1,0 +1,163 @@
+<style>
+    .fixed-width-label {
+        display: inline-block;
+        width: 150px; /* Ajoutez une largeur appropriée */
+    }
+</style>
+
+<div class="card align-items-center" style="font-family: 'Microsoft Tai Le'; width: 620px; height: auto;">
+    <div class="card-body" >
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+ <div class="form-group row" style="margin-top: 20px">
+            <label class="fixed-width-label">{{ form_label(form.idEtudiant) }}</label>
+            <div class="col-sm-10">
+                {{ form_widget(form.idEtudiant, {'attr': {'class': 'form-control'}}) }}
+                <div style="color: red">
+                    {{ form_errors(form.idEtudiant) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row" style="margin-top: 20px">
+            <label class="fixed-width-label">{{ form_label(form.nom) }}</label>
+            <div class="col-sm-10">
+                {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+                <div style="color: red">
+                    {{ form_errors(form.nom) }}
+                </div>
+            </div>
+        </div>
+
+       
+
+        <div class="form-group row" style="margin-top: 20px">
+            <label class="fixed-width-label">{{ form_label(form.prenom) }}</label>
+            <div class="col-sm-10">
+                {{ form_widget(form.prenom, {'attr': {'class': 'form-control'}}) }}
+                <div style="color: red">
+                    {{ form_errors(form.prenom) }}
+                </div>
+            </div>
+        </div>
+        
+   
+
+         <div class="form-group row" style="margin-top: 20px">
+            <label class="fixed-width-label">{{ form_label(form.cin) }}</label>
+            <div class="col-sm-10">
+                {{ form_widget(form.cin, {'attr': {'class': 'form-control'}}) }}
+                <div style="color: red">
+                    {{ form_errors(form.cin) }}
+                </div>
+            </div>
+        </div>
+
+
+         <div class="form-group row" style="margin-top: 20px">
+            <label class="fixed-width-label">{{ form_label(form.email) }}</label>
+            <div class="col-sm-10">
+                {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                <div style="color: red">
+                    {{ form_errors(form.email) }}
+                </div>
+            </div>
+        </div>
+
+
+         <div class="form-group row" style="margin-top: 20px">
+            <label class="fixed-width-label">{{ form_label(form.password) }}</label>
+            <div class="col-sm-10">
+                {{ form_widget(form.password, {'attr': {'class': 'form-control' , 'type': 'password'}}) }}
+                <div style="color: red">
+                    {{ form_errors(form.password) }}
+                </div>
+            </div>
+        </div>
+
+         <div class="form-group row" style="margin-top: 20px">
+            <label class="fixed-width-label">{{form_label(form.date_naissance)}}</label>
+            <div class="col-sm-10">
+                {{  form_widget(form.date_naissance)  }}
+                <div style="color: red">
+                    {{ form_errors(form.date_naissance) }}
+                </div>
+            </div>
+        </div>
+
+
+
+
+         <div class="form-group row" style="margin-top: 20px">
+            <label class="fixed-width-label">{{ form_label(form.moyenne1) }}</label>
+            <div class="col-sm-10">
+                {{ form_widget(form.moyenne1, {'attr': {'class': 'form-control'}}) }}
+                <div style="color: red">
+                    {{ form_errors(form.moyenne1) }}
+                </div>
+            </div>
+        </div>
+
+
+
+         <div class="form-group row" style="margin-top: 20px">
+            <label class="fixed-width-label">{{ form_label(form.moyenne2) }}</label>
+            <div class="col-sm-10">
+                {{ form_widget(form.moyenne2, {'attr': {'class': 'form-control'}}) }}
+                <div style="color: red">
+                    {{ form_errors(form.moyenne2) }}
+                </div>
+            </div>
+        </div>
+
+
+
+         <div class="form-group row" style="margin-top: 20px">
+            <label class="fixed-width-label">{{ form_label(form.moyenne3) }}</label>
+            <div class="col-sm-10">
+                {{ form_widget(form.moyenne3, {'attr': {'class': 'form-control'}}) }}
+                <div style="color: red">
+                    {{ form_errors(form.moyenne3) }}
+                </div>
+            </div>
+        </div>
+
+         <div class="form-group row" style="margin-top: 20px">
+            <label class="fixed-width-label">{{ form_label(form.niveauFR) }}</label>
+            <div class="col-sm-10">
+                {{ form_widget(form.niveauFR, {'attr': {'class': 'form-control'}}) }}
+                <div style="color: red">
+                    {{ form_errors(form.niveauFR) }}
+                </div>
+            </div>
+        </div>
+
+
+         <div class="form-group row" style="margin-top: 20px">
+            <label class="fixed-width-label">{{ form_label(form.niveauAN) }}</label>
+            <div class="col-sm-10">
+                {{ form_widget(form.niveauAN, {'attr': {'class': 'form-control'}}) }}
+                <div style="color: red">
+                    {{ form_errors(form.niveauAN) }}
+                </div>
+            </div>
+        </div>
+
+        <br>
+        
+
+
+
+
+   
+  {{ form_widget(form) }}
+    <button class="btn btn-outline-success" style="margin-bottom: 10px">{{ button_label|default('Save') }}</button>
+    <a href="{{ path('app_etudiant_esprit_index') }}"class="btn btn-outline-danger mx-1" style="margin-bottom: 10px">Annuler</a>
+
+     
+{{ form_end(form) }}
+ </div>
+</div>
+
+
+

@@ -1,0 +1,82 @@
+{% extends 'admin/admin.html.twig' %}
+
+{% block title %}EtudiantEsprit{% endblock %}
+
+{% block body %}
+   <div class="container my-2" style="font-family:'Microsoft Tai Le'">
+
+<h1 class="mb-2" style="
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100%;">Etudiant {{ etudiant_esprit.id }}</h1>
+    <div class="card mb-2">
+        <div class="card-body">
+<br> <br>
+    <table class="table table-sm">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ etudiant_esprit.id }}</td>
+            </tr>
+             <tr>
+                <th>Id Etudiant</th>
+                <td>{{ etudiant_esprit.idEtudiant }}</td>
+            </tr>
+       
+        
+            <tr>
+                <th>Nom</th>
+                <td>{{ etudiant_esprit.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ etudiant_esprit.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Cin</th>
+                <td>{{ etudiant_esprit.cin }}</td>
+            </tr>
+            <tr>
+                <th>Date_naissance</th>
+                <td>{{ etudiant_esprit.dateNaissance ? etudiant_esprit.dateNaissance|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Moyenne1</th>
+                <td>{{ etudiant_esprit.moyenne1 }}</td>
+            </tr>
+            <tr>
+                <th>Moyenne2</th>
+                <td>{{ etudiant_esprit.moyenne2 }}</td>
+            </tr>
+            <tr>
+                <th>Moyenne3</th>
+                <td>{{ etudiant_esprit.moyenne3 }}</td>
+            </tr>
+            <tr>
+                <th>NiveauFR</th>
+                <td>{{ etudiant_esprit.niveauFR }}</td>
+            </tr>
+            <tr>
+                <th>NiveauAN</th>
+                <td>{{ etudiant_esprit.niveauAN }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-center">
+<div class="btn-toolbar" role="toolbar">
+	<div class="btn-group">
+    <a href="{{ path('app_etudiant_esprit_edit', {'id': etudiant_esprit.id}) }}" class="btn btn-outline-success mx-1" style="margin-bottom: 10px">Modifier</a>
+<a href="{{ path('app_etudiant_esprit_index') }}" class="btn btn-outline-secondary mx-1" style="margin-bottom: 10px">Retour</a>
+
+    {{ include('etudiant_esprit/_delete_form.html.twig') }}
+
+      </div>
+     </div>
+
+    </div>
+    </div>
+      </div>  
+   
+{% endblock %}

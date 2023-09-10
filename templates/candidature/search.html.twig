@@ -1,0 +1,200 @@
+{% extends 'admin/admin.html.twig' %}
+
+{% block title %}
+    Résultats de la Recherche
+{% endblock %}
+
+{% block body %}
+    <div class="container my-2" style="font-family:'Microsoft Tai Le'">
+        <h1 class="mb-2" style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100%;">Résultats de la recherche des candidatures pour la faculté : </h1>
+             <h1 class="mb-2" style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100%;">{{ faculteNom }}</h1>
+
+
+        <div class="card mb-2">
+            <div class="card-body">
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Id Etudiant</th>
+                            <th>Score</th>
+                            <th>Résultats</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for candidature in candidatures %}
+                        <tr>
+                            <td>{{ candidature.EtudiantEsprit.idEtudiant }}</td>
+                            <td>
+                                <form class="score-form">
+                                    <input type="hidden" name="moyenne1" value="{{ candidature.EtudiantEsprit.moyenne1 }}">
+                                    <input type="hidden" name="moyenne2" value="{{ candidature.EtudiantEsprit.moyenne2 }}">
+                                    <input type="hidden" name="moyenne3" value="{{ candidature.EtudiantEsprit.moyenne3 }}">
+                                    <input type="hidden" name="niveauFR" value="{{ candidature.EtudiantEsprit.niveauFR }}">
+                                    <input type="hidden" name="niveauAn" value="{{ candidature.EtudiantEsprit.niveauAn }}">
+                                    <input type="text" name="score" value="" readonly>
+                                </form>
+                            </td>
+                  
+           <td>
+        <form class="update-form" method="post" action="{{ path('app_candidature_modif', {'id': candidature.id}) }}">
+            <select name="resultat">
+                <option value="EnCoursDExecution" {% if candidature.resultat == 'EnCoursDExecution' %}selected{% endif %}>En cours d'exécution</option>
+                <option value="accepter" {% if candidature.resultat == 'accepter' %}selected{% endif %}>Accepter</option>
+                <option value="refuser" {% if candidature.resultat == 'refuser' %}selected{% endif %}>Refuser</option>
+            </select>
+            <button type="button" class="btn btn-primary save-button">Enregistrer</button>
+        </form>
+</td>
+            
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="2">Aucun résultat trouvé</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                        <button type="button" class="btn btn-outline-info sort-students-btn">Trier par score décroissant</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="{{ asset('asset/vendor/glightbox/js/glightbox.min.js') }}"></script>
+    <script src="{{ asset('asset/vendor/swiper/swiper-bundle.min.js') }}"></script>
+     <script src="{{ asset('assets/vendor/aos/aos.js') }}"></script>
+  <script src="{{ asset('assets/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
+  <script src="{{ asset('assets/vendor/php-email-form/validate.js') }}"></script>
+
+    <script>
+        $(document).ready(function() {
+            // Variable pour suivre l'état du tri
+            var isSorted = false;
+
+            // Fonction pour calculer le score
+            function calculateScore(formData) {
+                var score = 0;
+
+                formData.forEach(function(item) {
+                    if (item.name === 'niveauFR' || item.name === 'niveauAn') {
+                        switch (item.value) {
+                            case 'a1':
+                                score += 3;
+                                break;
+                            case 'a2':
+                                score += 6;
+                                break;
+                            case 'b1':
+                                score += 9;
+                                break;
+                            case 'b2':
+                                score += 12;
+                                break;
+                            case 'c1':
+                                score += 15;
+                                break;
+                            default:
+                                // Gestion d'une valeur inconnue
+                                break;
+                        }
+                    } else {
+                        var numericValue = parseFloat(item.value);
+                        if (!isNaN(numericValue)) {
+                            score += numericValue;
+                        }
+                    }
+                });
+
+                return score;
+            }
+
+            // Fonction pour trier les étudiants par score décroissant
+            function sortStudentsByScore() {
+                // Si la liste est déjà triée, afficher une alerte et sortir
+                if (isSorted) {
+                    alert("La liste est déjà triée.");
+                    return;
+                }
+
+                var students = $('.score-form').toArray();
+
+                students.sort(function(a, b) {
+                    var scoreA = calculateScore($(a).serializeArray());
+                    var scoreB = calculateScore($(b).serializeArray());
+                    return scoreB - scoreA; // Tri décroissant
+                });
+
+                // Réinsérez les étudiants triés dans le tableau
+                var tbody = $('tbody');
+                students.forEach(function(studentForm) {
+                    tbody.append($(studentForm).closest('tr'));
+                });
+
+                // Mettre à jour les champs "Score" et les notifications après le tri
+                $('.score-form').each(function() {
+                    var formData = $(this).serializeArray();
+                    var score = calculateScore(formData);
+                    $(this).find('input[name="score"]').val(score);
+
+                  
+                });
+
+                // Mettre à jour l'état du tri
+                isSorted = true;
+            }
+
+            // Écouteur d'événement pour le bouton de tri
+            $('.sort-students-btn').click(function() {
+                sortStudentsByScore();
+            });
+
+            // Calcul initial des scores
+            $('.calculate-score-btn').click(function() {
+                $('.score-form').each(function() {
+                    var formData = $(this).serializeArray();
+                    var score = calculateScore(formData);
+                    $(this).find('input[name="score"]').val(score);
+                });
+            });
+        });
+
+// Écouteur d'événement pour le champ "Résultats" lorsqu'il change de valeur
+$(document).ready(function() {
+   $('.save-button').click(function() {
+    var form = $(this).closest('.update-form');
+    var selectedResultat = form.find('select[name="resultat"]').val();
+    
+    // Create an object to send in the AJAX request
+    var requestData = {
+        resultat: selectedResultat // Add the 'resultat' field to the data
+    };
+    
+    // Enregistrez la mise à jour automatiquement via Ajax
+    $.ajax({
+        type: 'POST',
+        url: form.attr('action'),
+        data: JSON.stringify(requestData), // Send the data as JSON
+        contentType: 'application/json', // Set the content type to JSON
+        success: function(response) {
+            // Gérez la réponse après la mise à jour si nécessaire
+        },
+        error: function(error) {
+            // Gérez les erreurs si nécessaire
+        }
+    });
+});
+
+});
+
+
+    </script>
+{% endblock %}

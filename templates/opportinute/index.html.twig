@@ -1,0 +1,54 @@
+{% extends 'admin/admin.html.twig' %}
+
+{% block title %}Liste des Opportinutés{% endblock %}
+
+{% block body %}
+     <div class="container my-2" style="font-family:'Microsoft Tai Le'">
+
+<h1 class="mb-2" style="
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100%;">Liste des Opportinutés </h1>
+
+   <div class="card mb-2">
+        <div class="card-body">
+<br> 
+
+    <table class="table table-sm">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>NomFaculte</th>
+                <th>DateDebut</th>
+                <th>Datefin</th>
+                <th>Titre</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for opportinute in opportinutes %}
+            <tr>
+                <td>{{ opportinute.id }}</td>
+                <td>{{ opportinute.NomFaculte }}</td>
+                <td>{{ opportinute.DateDebut ? opportinute.DateDebut|date('Y-m-d') : '' }}</td>
+                <td>{{ opportinute.Datefin ? opportinute.Datefin|date('Y-m-d') : '' }}</td>
+                <td>{{ opportinute.Titre }}</td>
+                <td>
+                    <a href="{{ path('app_opportinute_show', {'id': opportinute.id}) }}"class="btn btn-outline-info">Afficher</a>
+                    <a href="{{ path('app_opportinute_edit', {'id': opportinute.id}) }}"class="btn btn-outline-success">Modifier</a>
+                     <a href="{{ path('app_opportinute_delete', {'id': opportinute.id}) }}"class="btn btn-outline-danger">Supprimer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">Liste vide</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+<div class="d-flex justify-content-center">
+    <a href="{{ path('app_opportinute_new') }}"  class="btn btn-danger">Créer une nouvelle Opportinutés</a>
+     </div>
+{% endblock %}

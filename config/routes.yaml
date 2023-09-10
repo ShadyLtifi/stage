@@ -1,0 +1,31 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+
+app_front:
+    resource:  App\Controller\FrontController
+    type: annotation
+
+
+app_admin:
+    resource:  App\Controller\AdminController
+    type: annotation
+candidature_create:
+    path: '/{id}/candidature'
+    controller: 'App\Controller\OpportinuteController::createCandidature'
+    
+
+search_candidatures:
+    path: /candidatures/search
+    controller: App\Controller\CandidatureController::search
+    methods: ['GET']
+
+candidatures:
+    path: /candidatures
+    controller: App\Controller\CandidatureController::index
+    methods: ['GET']
+
+rechercher_candidatures:
+    path: /candidatures/rechercher
+    controller: App\Controller\CandidatureController::rechercherCandidatures
+    methods: ['GET']

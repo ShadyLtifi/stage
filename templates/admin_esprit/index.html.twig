@@ -1,0 +1,55 @@
+{% extends 'admin/admin.html.twig' %}
+
+
+
+{% block body %}
+  <div class="container my-2" style="font-family:'Microsoft Tai Le'">
+
+<h1 class="mb-2" style="
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100%;">Admin Esprit </h1>
+    <div class="card mb-2">
+        <div class="card-body">
+<br> 
+    <table class="table table-sm">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+        
+                <th>IdEsprit</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Cin</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for admin_esprit in admin_esprits %}
+            <tr>
+                <td>{{ admin_esprit.id }}</td>
+                <td>{{ admin_esprit.email }}</td>
+               
+                <td>{{ admin_esprit.idEsprit }}</td>
+                <td>{{ admin_esprit.nom }}</td>
+                <td>{{ admin_esprit.prenom }}</td>
+                <td>{{ admin_esprit.cin }}</td>
+                <td>
+                    <a href="{{ path('app_admin_esprit_show', {'id': admin_esprit.id}) }}" class="btn btn-outline-info">Afficher</a>
+                    <a href="{{ path('app_admin_esprit_edit', {'id': admin_esprit.id}) }}" class="btn btn-outline-success">Modifier</a>
+                    <a href="{{ path('app_admin_esprit_delete', {'id': admin_esprit.id}) }}" class="btn btn-outline-danger">Supprimer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">Table vide</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+<div class="d-flex justify-content-center">
+    <a href="{{ path('app_admin_esprit_new') }}"  class="btn btn-danger">Ajouter un nouveau AdminEsprit</a>
+</div>
+{% endblock %}

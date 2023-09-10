@@ -1,0 +1,92 @@
+security:
+    enable_authenticator_manager: true
+    password_hashers:
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+
+    providers:
+        app_AdminFac_provider:
+            entity:
+                class: App\Entity\AdminFac
+                property: email
+
+        app_AdminEs_provider:
+            entity:
+                class: App\Entity\AdminEsprit
+                property: email
+
+        app_EtudiantEs_provider:
+            entity:
+                class: App\Entity\EtudiantEsprit
+                property: email
+
+    firewalls:
+        admin_fac:
+            pattern: ^/loginFac
+            provider: app_AdminFac_provider
+            custom_authenticators: [App\Security\AdminFacAuthenticator]
+            logout:
+                path: app_logout
+                target: app_front
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 604800
+                always_remember_me: true
+
+        admin_esprit:
+            pattern: ^/loginEs
+            provider: app_AdminEs_provider
+            custom_authenticators: [App\Security\AdminEsAuthenticator]
+            logout:
+                path: app_logout
+                target: app_front
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 604800
+                always_remember_me: true
+
+        etudiant_esprit:
+            pattern: ^/loginEtudiant
+            provider: app_EtudiantEs_provider
+            custom_authenticators: [App\Security\EtudiantAuthenticator]
+            logout:
+                path: app_logout
+                target: app_front
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 604800
+                always_remember_me: true
+
+        main:
+            lazy: true
+            logout:
+                path: app_logout
+                target: app_front
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 604800
+                always_remember_me: true
+ 
+            # activate different ways to authenticate
+            # https://symfony.com/doc/current/security.html#the-firewall
+
+            # https://symfony.com/doc/current/security/impersonating_user.html
+            # switch_user: true
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        # - { path: ^/admin, roles: ROLE_ADMIN }
+        # - { path: ^/profile, roles: ROLE_USER }
+
+when@test:
+    security:
+        password_hashers:
+            # By default, password hashers are resource intensive and take time. This is
+            # important to generate secure password hashes. In tests however, secure hashes
+            # are not important, waste resources and increase test times. The following
+            # reduces the work factor to the lowest possible values.
+            Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
+                algorithm: auto
+                cost: 4 # Lowest possible value for bcrypt
+                time_cost: 3 # Lowest possible value for argon
+                memory_cost: 10 # Lowest possible value for argon

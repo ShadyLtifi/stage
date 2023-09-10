@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+		{% block title %}
+			<title>ESPRIT-Mobilité Internationale</title>
+		{% endblock %}
+		<meta content="" name="description">
+		<meta
+		content="" name="keywords">
+
+		<!-- Favicons -->
+		<link href="{{ asset('assets/img/tr.png') }}" rel="icon">
+		<link
+		href="{{ asset('assets/img/tr.png') }}" rel="apple-touch-icon">
+
+		<!-- Google Fonts -->
+		<link
+		href="{{ asset('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i') }}" rel="stylesheet">
+
+		<!-- Vendor CSS Files -->
+		{% block css %}
+			<link href="{{ asset('assets/vendor/aos/aos.css') }}" rel="stylesheet">
+			<link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+			<link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+			<link href="{{ asset('assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+			<link href="{{ asset('assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+			<link
+			href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+
+			<!-- Template Main CSS File -->
+			<link href="{{ asset('assets/css/style1.css') }}" rel="stylesheet">
+			<style>
+				/* Styles pour le conteneur du carrousel */
+				.carrousel-container {
+					overflow: hidden;
+					width: 100%;
+					max-width: 800px; /* Ajustez la largeur selon vos besoins */
+					margin: 0 auto;
+					position: relative;
+				}
+
+				/* Styles pour le carrousel */
+				.carrousel {
+					display: flex;
+					transition: transform 0.5s ease-in-out;
+				}
+
+				.carte {
+					flex: 0 0 100%;
+					padding: 20px;
+					text-align: center;
+					box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+					border-radius: 10px;
+					background-color: grey; /* Rouge transparent */
+					margin-right: 20px;
+					transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+				}
+
+				/* Styles pour les boutons de navigation */
+				.btn-prev,
+				.btn-next {
+					position: absolute;
+					top: 50%;
+					transform: translateY(-50%);
+					padding: 10px 15px;
+					background-color: rgba(0, 0, 0, 0.5);
+					color: #fff;
+					cursor: pointer;
+					border: none;
+					border-radius: 50%;
+					font-size: 24px;
+					z-index: 1;
+					transition: background-color 0.3s ease-in-out;
+				}
+
+				.btn-prev:hover,
+				.btn-next:hover {
+					background-color: rgba(0, 0, 0, 0.8);
+				}
+
+				.btn-prev {
+					left: 10px;
+				}
+
+				.btn-next {
+					right: 10px;
+				}
+
+				/* Styles pour le contenu de la carte */
+				.carte h2 {
+					font-size: 24px;
+					margin-bottom: 10px;
+					color: #fff; /* Texte en blanc */
+				}
+
+				.carte p {
+					font-size: 16px;
+					line-height: 1.5;
+					color: #fff; /* Texte en blanc */
+				}
+			</style>
+		{% endblock %}
+		<!-- =======================================================
+		  * Template Name: Flexor
+		  * Updated: Jul 27 2023 with Bootstrap v5.3.1
+		  * Template URL: https://bootstrapmade.com/flexor-free-multipurpose-bootstrap-template/
+		  * Author: BootstrapMade.com
+		  * License: https://bootstrapmade.com/license/
+		  ======================================================== -->
+	</head>
+
+	<body>
+		{% block nav %}
+			<!-- ======= Top Bar ======= -->
+			<section id="topbar" class="d-flex align-items-center">
+				<div class="container d-flex justify-content-center justify-content-md-between">
+					<div class="contact-info d-flex align-items-center">
+						<i class="bi bi-envelope d-flex align-items-center">
+							<a href="mailto:contact@esprit.tn">contact@esprit.tn</a>
+						</i>
+						<i class="bi bi-phone d-flex align-items-center ms-4">
+							<span>+216 70 250 000</span>
+						</i>
+					</div>
+
+					<div class="cta d-none d-md-flex align-items-center">
+						<a href="#" class="scrollto">Get Started</a>
+					</div>
+				</div>
+			</section>
+
+			<!-- ======= Header ======= -->
+			<header id="header" class="d-flex align-items-center">
+				<div class="container d-flex align-items-center justify-content-between">
+
+					<div class="logo">
+						<h1><img src="{{ asset('assets/img/logo-esprit-2.b8fedba0.png') }} " alt="logo"></h1>
+						<!-- Uncomment below if you prefer to use an image logo -->
+						<!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+					</div>
+
+					<nav id="navbar" class="navbar">
+						<ul>
+							<li>
+								<a class="nav-link scrollto active" href="{{ path('app_account') }}">Accueil</a>
+							</li>
+							<li>
+								<a class="nav-link scrollto" href="#">Programme Mobilité</a>
+							</li>
+
+							<li>
+								<a class="nav-link scrollto" href="{{ path('app_dashboard') }}">Mes dépots</a>
+							</li>
+							
+							<li class="nav-item dropdown pe-3">
+
+								<a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+
+									<span class="d-none d-md-block dropdown-toggle ps-2">{{ app.user.nom}}
+										{{ app.user.prenom}}</span>
+								</a>
+								<!-- End Profile Iamge Icon -->
+
+								<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+									<li class="dropdown-header">
+										<h6>Bienvenu
+											{{ app.user.nom}}
+											{{ app.user.prenom}}</h6>
+										<span>Admin</span>
+									</li>
+									<li>
+										<hr class="dropdown-divider">
+									</li>
+
+									<li>
+										<a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+											<i class="bi bi-person"></i>
+											<span>Profile</span>
+										</a>
+									</li>
+
+									<li>
+										<hr class="dropdown-divider">
+									</li>
+
+									<li>
+										<a class="dropdown-item d-flex align-items-center" href="{{ path('app_logout') }}">
+											<i class="bi bi-box-arrow-right"></i>
+											<span class="text-danger">Déconnexion</span>
+										</a>
+									</li>
+
+								</ul>
+								<!-- End Profile Dropdown Items -->
+								<i class="bi bi-list mobile-nav-toggle"></i>
+							</li>
+						</nav>
+						<!-- .navbar -->
+
+					</div>
+				</header>
+				<!-- End Header -->
+			{% endblock %}
+			<br>
+			<br>
+
+     
+
+			<div class="container d-flex justify-content-center align-items-center" >
+				<div class="card" style="font-family: 'Microsoft Tai Le'; width: 590px; height: auto; background-color: #f5f5f5;">
+					<div class="card-body text-center">
+
+						<h1>Formulaire de candidature</h1>
+						{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+<div style="width: 80%; margin: 0 auto;">
+						<div class="form-group row" style="margin-top: 20px">
+							<label class="fixed-width-label">{{ form_label(form.EtudiantEsprit.nom ) }}</label>
+							<div class="col-sm-10">
+								{{ form_widget(form.EtudiantEsprit.nom, {'attr': {'class': 'form-control'}}) }}
+								<div style="color: red">
+									{{ form_errors(form.EtudiantEsprit.nom) }}
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group row" style="margin-top: 20px">
+							<label class="fixed-width-label">{{ form_label(form.EtudiantEsprit.prenom) }}</label>
+							<div class="col-sm-10">
+								{{ form_widget(form.EtudiantEsprit.prenom, {'attr': {'class': 'form-control'}}) }}
+								<div style="color: red">
+									{{ form_errors(form.EtudiantEsprit.prenom) }}
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group row" style="margin-top: 20px">
+							<label class="fixed-width-label">{{ form_label(form.EtudiantEsprit.idEtudiant , 'Identifiant de l\'étudiant') }}</label>
+							<div class="col-sm-10">
+								{{ form_widget(form.EtudiantEsprit.idEtudiant, {'attr': {'class': 'form-control'}}) }}
+								<div style="color: red">
+									{{ form_errors(form.EtudiantEsprit.idEtudiant) }}
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group row" style="margin-top: 20px">
+							<label class="fixed-width-label">{{ form_label(form.EtudiantEsprit.email) }}</label>
+							<div class="col-sm-10">
+								{{ form_widget(form.EtudiantEsprit.email, {'attr': {'class': 'form-control'}}) }}
+								<div style="color: red">
+									{{ form_errors(form.EtudiantEsprit.email) }}
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group row" style="margin-top: 20px">
+							<label class="fixed-width-label">{{ form_label(form.EtudiantEsprit.cin , 'CIN') }}</label>
+							<div class="col-sm-10">
+								{{ form_widget(form.EtudiantEsprit.cin, {'attr': {'class': 'form-control'}}) }}
+								<div style="color: red">
+									{{ form_errors(form.EtudiantEsprit.cin) }}
+								</div>
+							</div>
+						</div>
+						<div class="form-group row" style="margin-top: 20px">
+							<label class="fixed-width-label">{{ form_label(form.EtudiantEsprit.date_naissance , 'Date de naissance') }}</label>
+							<div class="col-sm-10">
+								{{ form_widget(form.EtudiantEsprit.date_naissance, {'attr': {'class': 'form-control', 'type': 'date'}}) }}
+								<div style="color: red">
+									{{ form_errors(form.EtudiantEsprit.date_naissance) }}
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group row" style="margin-top: 20px">
+							<label class="fixed-width-label">{{ form_label(form.EtudiantEsprit.moyenne1 , 'Moyenne S1') }}</label>
+							<div class="col-sm-10">
+								{{ form_widget(form.EtudiantEsprit.moyenne1, {'attr': {'class': 'form-control'}}) }}
+								<div style="color: red">
+									{{ form_errors(form.EtudiantEsprit.moyenne1) }}
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group row" style="margin-top: 20px">
+							<label class="fixed-width-label">{{ form_label(form.EtudiantEsprit.moyenne2 , 'Moyenne S2') }}</label>
+							<div class="col-sm-10">
+								{{ form_widget(form.EtudiantEsprit.moyenne2, {'attr': {'class': 'form-control'}}) }}
+								<div style="color: red">
+									{{ form_errors(form.EtudiantEsprit.moyenne2) }}
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group row" style="margin-top: 20px">
+							<label class="fixed-width-label">{{ form_label(form.EtudiantEsprit.moyenne3 , 'Moyenne S3') }}</label>
+							<div class="col-sm-10">
+								{{ form_widget(form.EtudiantEsprit.moyenne3, {'attr': {'class': 'form-control'}}) }}
+								<div style="color: red">
+									{{ form_errors(form.EtudiantEsprit.moyenne3) }}
+								</div>
+							</div>
+						</div>
+
+
+						<div class="form-group row" style="margin-top: 20px">
+							<label class="fixed-width-label">{{ form_label(form.EtudiantEsprit.niveauFR , 'Niveau Français') }}</label>
+							<div class="col-sm-10">
+								{{ form_widget(form.EtudiantEsprit.niveauFR, {'attr': {'class': 'form-control'}}) }}
+								<div style="color: red">
+									{{ form_errors(form.EtudiantEsprit.niveauFR) }}
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group row" style="margin-top: 20px">
+							<label class="fixed-width-label">{{ form_label(form.EtudiantEsprit.niveauAn , 'Niveau Anglais') }}</label>
+							<div class="col-sm-10">
+								{{ form_widget(form.EtudiantEsprit.niveauAn, {'attr': {'class': 'form-control'}}) }}
+								<div style="color: red">
+									{{ form_errors(form.EtudiantEsprit.niveauAn) }}
+								</div>
+							</div>
+						</div>
+		</div>
+						<br>
+						<button type="submit" class="btn btn-danger">Soumettre</button>
+						{{ form_end(form) }}
+					</div>
+				</div>
+			</div>

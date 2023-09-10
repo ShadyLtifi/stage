@@ -1,0 +1,70 @@
+{% extends 'admin/admin.html.twig' %}
+
+{% block title %}EtudiantEsprit index{% endblock %}
+
+{% block body %}
+ <div class="container my-2" style="font-family:'Microsoft Tai Le'">
+
+<h1 class="mb-2" style="
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100%;">Liste Etudiants Esprit </h1>
+    <div class="card mb-2">
+        <div class="card-body">
+<br> 
+    <table class="table table-sm">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Id Esprit</th>
+                <th>Email</th>
+                
+
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Cin</th>
+                <th>Date_naissance</th>
+                <th>Moyenne S1</th>
+                <th>Moyenne S2</th>
+                <th>Moyenne S3</th>
+                <th>Niveau Français</th>
+                <th>Niveau Anglais</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for etudiant_esprit in etudiant_esprits %}
+            <tr>
+                <td>{{ etudiant_esprit.id }}</td>
+           <td>{{ etudiant_esprit.idEtudiant }}</td>
+                <td>{{ etudiant_esprit.email }}</td>
+          
+                <td>{{ etudiant_esprit.nom }}</td>
+                <td>{{ etudiant_esprit.prenom }}</td>
+                <td>{{ etudiant_esprit.cin }}</td>
+                <td>{{ etudiant_esprit.dateNaissance ? etudiant_esprit.dateNaissance|date('Y-m-d') : '' }}</td>
+                <td>{{ etudiant_esprit.moyenne1 }}</td>
+                <td>{{ etudiant_esprit.moyenne2 }}</td>
+                <td>{{ etudiant_esprit.moyenne3 }}</td>
+                <td>{{ etudiant_esprit.niveauFR }}</td>
+                <td>{{ etudiant_esprit.niveauAN }}</td>
+           
+                <td>
+                    <a href="{{ path('app_etudiant_esprit_show', {'id': etudiant_esprit.id}) }}" class="btn btn-outline-info">Afficher</a>
+                    <a href="{{ path('app_etudiant_esprit_edit', {'id': etudiant_esprit.id}) }}"class="btn btn-outline-success">Modifier</a>
+                      <a href="{{ path('app_etudiant_esprit_delete', {'id': etudiant_esprit.id}) }}"class="btn btn-outline-danger">Supprimer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="14">Liste vide</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br> <br> <br> <br> 
+<div class="d-flex justify-content-center">
+    <a href="{{ path('app_etudiant_esprit_new') }}" class="btn btn-danger">Ajouter un nouveau étudiant</a>
+    </div>
+{% endblock %}

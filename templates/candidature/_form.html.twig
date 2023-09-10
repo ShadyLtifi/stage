@@ -1,0 +1,43 @@
+<style>
+	.fixed-width-label {
+		display: inline-block;
+		width: 150px; /* Ajoutez une largeur appropriée */
+	}
+</style>
+
+<div class="card align-items-center" style="font-family: 'Microsoft Tai Le'; width: 620px; height: auto;">
+	<div class="card-body">
+
+
+		{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+		<div class="form-group row" style="margin-top: 20px">
+			<label class="fixed-width-label">{{ form_label(form.Opportinute) }}</label>
+			<div class="col-sm-10">
+				{{ form_widget(form.Opportinute, {'attr': {'class': 'form-control'}}) }}
+				<div style="color: red">
+					{{ form_errors(form.Opportinute) }}
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group row" style="margin-top: 20px">
+			<label class="fixed-width-label">{{ form_label(form.EtudiantEsprit) }}</label>
+			<div class="col-sm-10">
+				{{ form_widget(form.EtudiantEsprit, {'attr': {'class': 'form-control'}}) }}
+				<div style="color: red">
+					{{ form_errors(form.EtudiantEsprit) }}
+				</div>
+			</div>
+		</div>
+
+		<br>
+		<button class="btn btn-outline-success" style="margin-bottom: 10px">{{ button_label|default('Ajouter') }}</button>
+
+		<a href="{{ path('app_candidature_index') }}" class="btn btn-outline-secondary" style="margin-bottom: 10px">Retour</a>
+
+		{{ include('candidature/_delete_form.html.twig') }}
+		{{ form_end(form) }}
+
+	</div>
+</div>
