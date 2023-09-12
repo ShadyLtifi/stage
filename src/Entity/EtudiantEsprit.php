@@ -9,6 +9,8 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: EtudiantEspritRepository::class)]
+#[UniqueEntity(fields: ['email'], message: 'email est déja existe')]
+#[UniqueEntity(fields: ['cin'], message: 'CIN est déja existe')]
 class EtudiantEsprit implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -16,6 +18,7 @@ class EtudiantEsprit implements UserInterface, PasswordAuthenticatedUserInterfac
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotBlank(message:"le champ disponible est obligatoire")]
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
@@ -25,36 +28,56 @@ class EtudiantEsprit implements UserInterface, PasswordAuthenticatedUserInterfac
     /**
      * @var string The hashed password
      */
+    #[Assert\NotBlank(message:"le champ disponible est obligatoire")]
+    #[Assert\Length(
+        min: 2,
+        max: 10,
+        minMessage: 'il faut que le mdp contient au moins {{ limit }} caractères ',
+        maxMessage: 'il faut que le mdp ne dépasse pas {{ limit }} caractères',)]
     #[ORM\Column]
     private ?string $password = null;
 
+    #[Assert\NotBlank(message:"le champ disponible est obligatoire")]
     #[ORM\Column(length: 50)]
     private ?string $nom = null;
 
+    #[Assert\NotBlank(message:"le champ disponible est obligatoire")]
     #[ORM\Column(length: 255)]
     private ?string $prenom = null;
-
-    #[ORM\Column(length: 20)]
+    #[Assert\NotBlank(message:"le champ disponible est obligatoire")]
+    #[ORM\Column(length: 20, unique: true)]
     private ?string $idEtudiant = null;
 
+    #[Assert\NotBlank(message:"le champ disponible est obligatoire")]
+    #[Assert\Length(
+        min: 8,
+        max: 8,
+        minMessage: 'il faut que la CIN contient  {{ limit }} caractères ',
+        maxMessage: 'il faut que la CIN contient  {{ limit }} caractères',)]
     #[ORM\Column]
     private ?int $cin = null;
 
+    #[Assert\NotBlank(message:"le champ disponible est obligatoire")]
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date_naissance = null;
 
+    #[Assert\NotBlank(message:"le champ disponible est obligatoire")]
     #[ORM\Column(length: 20)]
     private ?string $moyenne1 = null;
 
+    #[Assert\NotBlank(message:"le champ disponible est obligatoire")]
     #[ORM\Column(length: 255)]
     private ?string $moyenne2 = null;
 
+    #[Assert\NotBlank(message:"le champ disponible est obligatoire")]
     #[ORM\Column(length: 255)]
     private ?string $moyenne3 = null;
 
+    #[Assert\NotBlank(message:"le champ disponible est obligatoire")]
     #[ORM\Column(length: 255)]
     private ?string $niveauFR = null;
 
+    #[Assert\NotBlank(message:"le champ disponible est obligatoire")]
     #[ORM\Column(length: 255)]
     private ?string $niveauAn = null;
 

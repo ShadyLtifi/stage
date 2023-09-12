@@ -8,6 +8,8 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: AdminEspritRepository::class)]
+#[UniqueEntity(fields: ['email'], message: 'email est déja existe')]
+#[UniqueEntity(fields: ['cin'], message: 'CIN est déja existe')]
 class AdminEsprit implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -15,6 +17,7 @@ class AdminEsprit implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotBlank(message:"le champ disponible est obligatoire")]
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
@@ -24,18 +27,33 @@ class AdminEsprit implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      */
+    #[Assert\NotBlank(message:"le champ disponible est obligatoire")]
+    #[Assert\Length(
+        min: 2,
+        max: 10,
+        minMessage: 'il faut que le mdp contient au moins {{ limit }} caractères ',
+        maxMessage: 'il faut que le mdp ne dépasse pas {{ limit }} caractères',)]
     #[ORM\Column]
     private ?string $password = null;
 
+    #[Assert\NotBlank(message:"le champ disponible est obligatoire")]
     #[ORM\Column(length: 50)]
     private ?string $idEsprit = null;
 
+    #[Assert\NotBlank(message:"le champ disponible est obligatoire")]
     #[ORM\Column(length: 50)]
     private ?string $nom = null;
 
+    #[Assert\NotBlank(message:"le champ disponible est obligatoire")]
     #[ORM\Column(length: 50)]
     private ?string $prenom = null;
 
+    #[Assert\NotBlank(message:"le champ disponible est obligatoire")]
+    #[Assert\Length(
+        min: 8,
+        max: 8,
+        minMessage: 'il faut que la CIN contient  {{ limit }} caractères ',
+        maxMessage: 'il faut que la CIN contient  {{ limit }} caractères',)]
     #[ORM\Column]
     private ?int $cin = null;
 

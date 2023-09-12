@@ -14,18 +14,23 @@ class Opportinute
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotBlank(message:"le champ disponnible est obligatoire")]
     #[ORM\Column(length: 255)]
     private ?string $NomFaculte = null;
 
+    #[Assert\NotBlank(message:"le champ disponnible est obligatoire")]
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $DateDebut = null;
 
+    #[Assert\NotBlank(message:"le champ disponnible est obligatoire")]
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $Datefin = null;
 
+    #[Assert\NotBlank(message:"le champ disponnible est obligatoire")]
     #[ORM\Column(length: 1000)]
     private ?string $description = null;
 
+    #[Assert\NotBlank(message:"le champ disponnible est obligatoire")]
     #[ORM\Column(length: 255)]
     private ?string $Titre = null;
 

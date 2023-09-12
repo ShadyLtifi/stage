@@ -33,9 +33,11 @@
                 <td>{{ opportinute.Datefin ? opportinute.Datefin|date('Y-m-d') : '' }}</td>
                 <td>{{ opportinute.Titre }}</td>
                 <td>
-                    <a href="{{ path('app_opportinute_show', {'id': opportinute.id}) }}"class="btn btn-outline-info">Afficher</a>
-                    <a href="{{ path('app_opportinute_edit', {'id': opportinute.id}) }}"class="btn btn-outline-success">Modifier</a>
-                     <a href="{{ path('app_opportinute_delete', {'id': opportinute.id}) }}"class="btn btn-outline-danger">Supprimer</a>
+                    <a href="{{ path('app_opportinute_show', {'id': opportinute.id}) }}"class="btn btn-outline-success btn-sm mr-2"><i class="bi bi-chat-left-text"></i></a>
+                    <a href="{{ path('app_opportinute_edit', {'id': opportinute.id}) }}"class="btn btn-outline-secondary btn-sm"><i class="bi bi-pencil-square"></i></a>
+                     <a href="{{ path('app_opportinute_delete', {'id': opportinute.id}) }}"class="d-inline" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ opportinute.id) }}">
+                        <button type="submit" class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></button>
                 </td>
             </tr>
         {% else %}
@@ -47,6 +49,6 @@
     </table>
 
 <div class="d-flex justify-content-center">
-    <a href="{{ path('app_opportinute_new') }}"  class="btn btn-danger">Créer une nouvelle Opportinutés</a>
+    <a href="{{ path('app_opportinute_new') }}"  >  <i class="bi bi-person-fill-add" style="font-size: 55px;"></i></a>
      </div>
 {% endblock %}
