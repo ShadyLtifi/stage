@@ -10,12 +10,12 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-height: 100%;">Résultats de la recherche des candidatures pour la faculté : </h1>
+            min-height: 100%;">Résultats de la recherche des candidatures pour les facultés de titre : </h1>
              <h1 class="mb-2" style="
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-height: 100%;">{{ faculteNom }}</h1>
+            min-height: 100%;">{{ Titre }}</h1>
 
 
         <div class="card mb-2">
@@ -48,8 +48,8 @@
         <form class="update-form" method="post" action="{{ path('app_candidature_modif', {'id': candidature.id}) }}">
             <select name="resultat">
                 <option value="EnCoursDExecution" {% if candidature.resultat == 'EnCoursDExecution' %}selected{% endif %}>En cours d'exécution</option>
-                <option value="accepter" {% if candidature.resultat == 'accepter' %}selected{% endif %}>Accepter</option>
-                <option value="refuser" {% if candidature.resultat == 'refuser' %}selected{% endif %}>Refuser</option>
+                <option value="Accepté(e)" {% if candidature.resultat == 'Accepté(e)' %}selected{% endif %}>Accepté(e)</option>
+                <option value="Refusé(e)" {% if candidature.resultat == 'Refusé(e)' %}selected{% endif %}>Refusé(e)</option>
             </select>
             <button type="button" class="btn btn-primary save-button">Enregistrer</button>
         </form>

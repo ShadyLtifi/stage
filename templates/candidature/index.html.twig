@@ -16,38 +16,43 @@
 			<div class="card-body">
 				<br>
 				<br>
-
+	  {% if is_granted('ROLE_ADMIN_ESPRIT') %}
 <form method="GET" action="{{ path('search_candidatures') }}">
-    <input type="text" name="faculteNom" placeholder="Nom de la faculté">
+    <input type="text" name="Titre" placeholder="Titre de l'opportunité">
     <button type="submit">Rechercher</button>
 </form>
-
+  {% endif %}
 <br>
 <br>
 
 				<table class="table table-sm">
 					<thead>
 						<tr>
-							<th>Id</th>
+						
 							<th>Id Etudiant</th>
-							<th>Nom Faculté</th>
+							<th>Titre</th>
+							<th>Résultat</th>
 							<th>actions</th>
 						</tr>
 					</thead>
 					<tbody>
 						{% for candidature in candidatures %}
 							<tr>
-								<td>{{ candidature.id }}</td>
+							
 								<td>{{ candidature.EtudiantEsprit.idEtudiant }}</td>
-								<td>{{ candidature.Opportinute.NomFaculte }}</td>
+								<td>{{ candidature.Opportinute.Titre }}</td>
+								<td>{{ candidature.resultat }}</td>
 
 								<td>
-									<a href="{{ path('app_candidature_show', {'id': candidature.id}) }}" class="btn btn-outline-info">Afficher</a>
-									<a href="{{ path('app_candidature_edit', {'id': candidature.id}) }}" class="btn btn-outline-success">Modifier</a>
-									<a href="{{ path('app_candidature_delete', {'id': candidature.id}) }}" class="btn btn-outline-danger">Supprimer</a>
+    {% if is_granted('ROLE_ADMIN_ESPRIT') %}
+        <a href="{{ path('app_candidature_show', {'id': candidature.id}) }}" class="btn btn-outline-info">Afficher</a>
+        <a href="{{ path('app_candidature_edit', {'id': candidature.id}) }}" class="btn btn-outline-success">Modifier</a>
+        <a href="{{ path('app_candidature_delete', {'id': candidature.id}) }}" class="btn btn-outline-danger">Supprimer</a>
+    {% elseif is_granted('ROLE_ADMIN_FAC') %}
+        <a href="{{ path('app_candidature_show', {'id': candidature.id}) }}" class="btn btn-outline-info">Afficher</a>
+    {% endif %}
+</td>
 
-
-								</td>
 							</tr>
 						{% else %}
 							<tr>
@@ -56,9 +61,11 @@
 						{% endfor %}
 					</tbody>
 				</table>
+				  {% if is_granted('ROLE_ADMIN_ESPRIT') %}
 				<div class="d-flex justify-content-center">
 					<a href="{{ path('app_candidature_new') }}" class="btn btn-danger">Créer un nouveau Candidat</a>
 
 				</div>
+				  {% endif %}
 			{% endblock %}
 

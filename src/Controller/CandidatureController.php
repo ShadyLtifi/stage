@@ -21,7 +21,9 @@ class CandidatureController extends AbstractController
     {
         return $this->render('candidature/index.html.twig', [
             'candidatures' => $candidatureRepository->findAll(),
+         
         ]);
+     
     }
 
     #[Route('/new', name: 'app_candidature_new', methods: ['GET', 'POST'])]
@@ -84,8 +86,8 @@ class CandidatureController extends AbstractController
     #[Route('/rechercher', name: 'rechercher_candidatures')]
     public function rechercherCandidatures(Request $request, CandidatureRepository $repository): Response
     {
-        $faculteNom = $request->query->get('faculteNom');
-        $candidatures = $repository->findByFaculteNom($faculteNom);
+        $titre = $request->query->get('Titre');
+        $candidatures = $repository->findByFaculteNom($titre);
 
         return $this->render('candidature/index.html.twig', [
             'candidatures' => $candidatures,
@@ -95,11 +97,11 @@ class CandidatureController extends AbstractController
     #[Route('/search', name: 'search_candidatures')]
     public function search(Request $request, CandidatureRepository $repository): Response
     {
-        $faculteNom = $request->query->get('faculteNom');
-        $candidatures = $repository->findByFaculteNom($faculteNom);
+        $titre = $request->query->get('Titre');
+        $candidatures = $repository->findByFaculteNom($titre);
 
         return $this->render('candidature/search.html.twig', [
-            'faculteNom' => $faculteNom,
+            'Titre' => $titre,
             'candidatures' => $candidatures,
         ]);
     }

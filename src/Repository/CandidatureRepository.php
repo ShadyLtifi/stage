@@ -22,12 +22,12 @@ class CandidatureRepository extends ServiceEntityRepository
     }
 
 
-    public function findByFaculteNom($faculteNom)
+    public function findByFaculteNom($titre)
     {
         return $this->createQueryBuilder('c')
             ->join('c.Opportinute', 'o')
-            ->andWhere('o.NomFaculte = :faculteNom')
-            ->setParameter('faculteNom', $faculteNom)
+            ->andWhere('o.Titre = :Titre')
+            ->setParameter('Titre', $titre)
             ->getQuery()
             ->getResult();
     }

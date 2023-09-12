@@ -18,7 +18,6 @@
     <table class="table table-sm">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>NomFaculte</th>
                 <th>DateDebut</th>
                 <th>Datefin</th>
@@ -29,7 +28,6 @@
         <tbody>
         {% for opportinute in opportinutes %}
             <tr>
-                <td>{{ opportinute.id }}</td>
                 <td>{{ opportinute.NomFaculte }}</td>
                 <td>{{ opportinute.DateDebut ? opportinute.DateDebut|date('Y-m-d') : '' }}</td>
                 <td>{{ opportinute.Datefin ? opportinute.Datefin|date('Y-m-d') : '' }}</td>

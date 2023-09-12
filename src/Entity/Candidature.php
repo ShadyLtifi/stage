@@ -60,10 +60,10 @@ class Candidature
 
     public function setResultat(string $resultat): self
     {
-        if ($resultat === 'accepter' || $resultat === 'refuser') {
+        if ($resultat === 'Accepté(e)' || $resultat === 'Refusé(e)') {
             $this->resultat = $resultat;
         } else {
-            throw new \InvalidArgumentException("Le résultat doit être 'accepter' ou 'refuser'.");
+            throw new \InvalidArgumentException("Le résultat doit être 'Accepté(e)' ou 'Refusé(e)'.");
         }
 
         return $this;

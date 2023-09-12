@@ -1,283 +1,257 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+	<head>
+		<meta charset="utf-8">
+		<meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+		{% block title %}
+			<title>ESPRIT-Mobilité Internationale</title>
+		{% endblock %}
+		<meta content="" name="description">
+		<meta
+		content="" name="keywords">
 
-    {% block title %}   <title>Mes dépots</title>  {% endblock %}
+		<!-- Favicons -->
+		<link href="{{ asset('assets/img/tr.png') }}" rel="icon">
+		<link
+		href="{{ asset('assets/img/tr.png') }}" rel="apple-touch-icon">
 
-  <link href="{{ asset('assets/img/tr.png') }}" rel="icon">
-  <link href="{{ asset('assets/img/tr.png') }}" rel="apple-touch-icon">
-    <!-- Custom fonts for this template -->
-    {% block css %}
-    <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
-    <link
-        href="{{ asset('https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i') }}"
-        rel="stylesheet">
+		<!-- Google Fonts -->
+		<link
+		href="{{ asset('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i') }}" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="{{ asset('css1/sb-admin-2.min.css') }}" rel="stylesheet">
+		<!-- Vendor CSS Files -->
+		{% block css %}
+			<link href="{{ asset('assets/vendor/aos/aos.css') }}" rel="stylesheet">
+			<link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+			<link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+			<link href="{{ asset('assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+			<link href="{{ asset('assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+			<link
+			href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
 
-    <!-- Custom styles for this page -->
-    <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
-    {% endblock %}
-</head>
+			<!-- Template Main CSS File -->
+			<link href="{{ asset('assets/css/style1.css') }}" rel="stylesheet">
+			<style>
+				/* Styles pour le conteneur du carrousel */
+				.carrousel-container {
+					overflow: hidden;
+					width: 100%;
+					max-width: 800px; /* Ajustez la largeur selon vos besoins */
+					margin: 0 auto;
+					position: relative;
+				}
 
-<body id="page-top">
-    {% block nav %}
-    <!-- Page Wrapper -->
-    <div id="wrapper">
-        {% block nav1 %}
-        <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+				/* Styles pour le carrousel */
+				.carrousel {
+					display: flex;
+					transition: transform 0.5s ease-in-out;
+				}
 
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ path('app_dashboard') }}">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">Consultez vos dépots</div>
-            </a>
-               <hr class="sidebar-divider my-0">
-<br> <br> <br> <br> <br> <br>
-            <!-- Divider -->
-         
-   <hr class="sidebar-divider my-0">
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="{{ path('app_account') }}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Historique des dépots</span></a>
-            </li>
-  <hr class="sidebar-divider">
+				.carte {
+					flex: 0 0 100%;
+					padding: 20px;
+					text-align: center;
+					box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+					border-radius: 10px;
+					background-color: grey; /* Rouge transparent */
+					margin-right: 20px;
+					transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+				}
 
+				/* Styles pour les boutons de navigation */
+				.btn-prev,
+				.btn-next {
+					position: absolute;
+					top: 50%;
+					transform: translateY(-50%);
+					padding: 10px 15px;
+					background-color: rgba(0, 0, 0, 0.5);
+					color: #fff;
+					cursor: pointer;
+					border: none;
+					border-radius: 50%;
+					font-size: 24px;
+					z-index: 1;
+					transition: background-color 0.3s ease-in-out;
+				}
 
-            <!-- Nav Item - Tables -->
-            <li class="nav-item ">
-                <a class="nav-link" href="{{ path('app_account') }}">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Accueil</span></a>
-            </li>
-            <!-- Divider -->
-       
-          
-            <!-- Divider -->
-          
+				.btn-prev:hover,
+				.btn-next:hover {
+					background-color: rgba(0, 0, 0, 0.8);
+				}
 
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
+				.btn-prev {
+					left: 10px;
+				}
 
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
+				.btn-next {
+					right: 10px;
+				}
 
-        </ul>
-        {% endblock %}
-        <!-- End of Sidebar -->
-        {% block nav2 %}
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+				/* Styles pour le contenu de la carte */
+				.carte h2 {
+					font-size: 24px;
+					margin-bottom: 10px;
+					color: #fff; /* Texte en blanc */
+				}
 
-            <!-- Main Content -->
-            <div id="content">
+				.carte p {
+					font-size: 16px;
+					line-height: 1.5;
+					color: #fff; /* Texte en blanc */
+				}
+			</style>
+		{% endblock %}
+		<!-- =======================================================
+						  * Template Name: Flexor
+						  * Updated: Jul 27 2023 with Bootstrap v5.3.1
+						  * Template URL: https://bootstrapmade.com/flexor-free-multipurpose-bootstrap-template/
+						  * Author: BootstrapMade.com
+						  * License: https://bootstrapmade.com/license/
+						  ======================================================== -->
+	</head>
 
-                <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+	<body>
+		{% block nav %}
+			<!-- ======= Top Bar ======= -->
+			<section id="topbar" class="d-flex align-items-center">
+				<div class="container d-flex justify-content-center justify-content-md-between">
+					<div class="contact-info d-flex align-items-center">
+						<i class="bi bi-envelope d-flex align-items-center">
+							<a href="mailto:contact@esprit.tn">contact@esprit.tn</a>
+						</i>
+						<i class="bi bi-phone d-flex align-items-center ms-4">
+							<span>+216 70 250 000</span>
+						</i>
+					</div>
 
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <form class="form-inline">
-                        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                            <i class="fa fa-bars"></i>
-                        </button>
-                    </form>
+					<div class="cta d-none d-md-flex align-items-center">
+						<a href="#" class="scrollto">Get Started</a>
+					</div>
+				</div>
+			</section>
 
-                    <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+			<!-- ======= Header ======= -->
+			<header id="header" class="d-flex align-items-center">
+				<div class="container d-flex align-items-center justify-content-between">
 
-                    <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
+					<div class="logo">
+						<h1><img src="{{ asset('assets/img/logo-esprit-2.b8fedba0.png') }} " alt="logo"></h1>
+						<!-- Uncomment below if you prefer to use an image logo -->
+						<!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+					</div>
 
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search"
-                                            aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
+					<nav id="navbar" class="navbar">
+						<ul>
+							<li>
+								<a class="nav-link scrollto " href="{{ path('app_account') }}">Accueil</a>
+							</li>
+							<li>
+								<a class="nav-link scrollto" href="{{ path('app_account') }}">Programme Mobilité</a>
+							</li>
 
+							<li>
+								<a class="nav-link scrollto active" href="{{ path('app_dashboard_index') }}">Mes dépots</a>
+							</li>
 
-                        <div class="topbar-divider d-none d-sm-block"></div>
+							<li class="nav-item dropdown pe-3">
 
-                        <!-- Nav Item - User Information -->
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Nom + Prenom</span>
-                               
-                            </a>
-                            <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
-                                </a>
-                            </div>
-                        </li>
+								<a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
 
-                    </ul>
+									<span class="d-none d-md-block dropdown-toggle ps-2">{{ app.user.nom}}
+										{{ app.user.prenom}}</span>
+								</a>
+								<!-- End Profile Iamge Icon -->
 
-                </nav>
-                <!-- End of Topbar -->
+								<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+									<li class="dropdown-header">
+										<h6>Bienvenu
+											{{ app.user.nom}}
+											{{ app.user.prenom}}</h6>
+										<span>Etudiant</span>
+									</li>
+									<li>
+										<hr class="dropdown-divider">
+									</li>
 
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
+									<li>
+										<a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+											<i class="bi bi-person"></i>
+											<span>Profile</span>
+										</a>
+									</li>
 
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Consultez les dépots de Mobilité</h1>
-           
+									<li>
+										<hr class="dropdown-divider">
+									</li>
 
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Tables des dépots</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Nom Faculté</th>
-                                            <th>Ville</th>
-                                            <th>Actions</th>
-                                            
-                                    </thead>
-                                    
-                                    <tbody>
-                                        <tr>
-                                            <td>xyz</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                         
-                                        </tr>
-                                       
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+									<li>
+										<a class="dropdown-item d-flex align-items-center" href="{{ path('app_logout') }}">
+											<i class="bi bi-box-arrow-right"></i>
+											<span class="text-danger">Déconnexion</span>
+										</a>
+									</li>
 
-                </div>
-                <!-- /.container-fluid -->
+								</ul>
+								<!-- End Profile Dropdown Items -->
+								<i class="bi bi-list mobile-nav-toggle"></i>
+							</li>
+						</nav>
+						<!-- .navbar -->
 
-            </div>
-            <!-- End of Main Content -->
+					</div>
+				</header>
+				<!-- End Header -->
+			{% endblock %}
+			<!-- End of Topbar -->
+			{% block body %}
+				<br>
+				<div class="card mb-2">
+					<div class="card-body">
+						<br>
 
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        &copy; Copyright <strong><span>ESPRIT</span></strong>. All Rights Reserved
-                        <br>
-                        Designed by <a href="#">SummerTeam</a>
-                    </div>
-                   
-         
+						<div class="table-responsive text-center">
+							<table class="table table-bordered table-striped" style="background-color: lightgray;">
+								<thead>
+									<tr>
+										<th>Id Etudiant</th>
+										<th>Titre</th>
+										<th>Résultat</th>
+									</tr>
+								</thead>
 
-                </div>
-            </footer>
-            <!-- End of Footer -->
+								<tbody>
+									{% for candidature in candidatures %}
+										<tr>
+											<td>{{ candidature.EtudiantEsprit.idEtudiant }}</td>
+											<td>{{ candidature.Opportinute.Titre }}</td>
+											<td>{{ candidature.resultat }}</td>
+										</tr>
+									{% else %}
+										<tr>
+											<td colspan="3">no records found</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</body>
+		</body>
+	</html>
+</div>{% endblock %}</div><!-- End of Main Content --><!-- Footer --><footer class="sticky-footer bg-white"><div class="container my-auto">
+<div class="copyright text-center my-auto">
+	&copy; Copyright
+	<strong>
+		<span>ESPRIT</span>
+	</strong>. All Rights Reserved
+	<br>
+	Designed by
+	<a href="#">SummerTeam</a>
+</div></div></footer><!-- End of Footer --></div><!-- End of Content Wrapper --></div><!-- End of Page Wrapper --><!-- Scroll to Top Button-->{% block autre %}<a class="scroll-to-top rounded" href="#page-top"><i class="fas fa-angle-up"></i></a><!-- Logout Modal--><div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"><div class="modal-dialog" role="document"><div class="modal-content">
 
-        </div>
-        {% endblock %}
-        <!-- End of Content Wrapper -->
+</div></div></div>{% endblock %}<!-- Bootstrap core JavaScript-->{% block js %}<script src="vendor/jquery/jquery.min.js"></script><script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script><!-- Core plugin JavaScript--><script src="vendor/jquery-easing/jquery.easing.min.js"></script><!-- Custom scripts for all pages--><script src="js/sb-admin-2.min.js"></script><!-- Page level plugins --><script src="vendor/datatables/dataTables.bootstrap4.min.js"></script><!-- Page level custom scripts --><script src="js/demo/datatables-demo.js"></script>{% endblock %}</body></html>
 
-    </div>
-    {% endblock %}
-    <!-- End of Page Wrapper -->
-
-    <!-- Scroll to Top Button-->
-    {% block autre %}
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    {% endblock %}
-    <!-- Bootstrap core JavaScript-->
-    {% block js %}
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
-
-    <!-- Page level plugins -->
-    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="js/demo/datatables-demo.js"></script>
- {% endblock %}
-</body>
-
-</html>

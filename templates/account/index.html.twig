@@ -32,7 +32,7 @@
       
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
           	<li>
-								<a class="nav-link scrollto" href="{{ path('app_dashboard') }}">Mes dépots</a>
+								<a class="nav-link scrollto" href="{{ path('app_dashboard_index') }}">Mes dépots</a>
 							</li>
           <li class="dropdown">
 						<a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
@@ -48,7 +48,7 @@
 								<h6>Bienvenu
 									{{ app.user.nom}}
 									{{ app.user.prenom}}</h6>
-								<span>Admin</span>
+								<span>Etudiant</span>
 							</li>
 							<li>
 								<hr class="dropdown-divider">
@@ -92,7 +92,7 @@
             {% for opportinute in opportinute %}
             <div class="carte">
                 <h2 style="color: #A91818;">{{ opportinute.Titre }}</h2>
-                <p>{{ opportinute.id }}</p>
+            
                   <p>{{ opportinute.DateDebut ? opportinute.DateDebut|date('Y-m-d') : '' }} - {{ opportinute.Datefin ? opportinute.Datefin|date('Y-m-d') : ''}}</p>
                 <p>{{ opportinute.description }}</p>
                 <p><a href= "{{  path('candidature_create',{'id': opportinute.id}) }}"><i class="bi bi-arrow-right"></i>Remplir le Formulaire</a><p>

@@ -113,7 +113,7 @@ class OpportinuteController extends AbstractController
             $entityManager->flush();
 
           
-            return $this->redirectToRoute('app_dashboard'); 
+            return $this->redirectToRoute('app_dashboard_index'); 
         }
 
         return $this->render('opportinute/candidature.html.twig', [
